@@ -1,6 +1,6 @@
 export function translate(
 	key: string,
-	formatObj: Record<string, string> | string[]
+	formatObj?: Record<string, string> | string[]
 ): string
 
 export function addTranslations(

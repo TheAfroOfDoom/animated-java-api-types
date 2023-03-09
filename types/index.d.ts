@@ -1,3 +1,4 @@
+import './global'
 import type { AnimatedJavaExporter } from './animatedJavaExporter'
 import type { generateSearchTree, JsonText } from './minecraft'
 import type { IAnimatedJavaProjectSettings } from './projectSettings'
