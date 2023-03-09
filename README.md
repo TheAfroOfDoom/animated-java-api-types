@@ -1,0 +1,1 @@
+# animated-jata-api-types
