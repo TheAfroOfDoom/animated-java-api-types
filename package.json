@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "@types/node": "^18.14.6",
+    "blockbench-types": "https://github.com/SnaveSutit/blockbench-types.git",
+    "deepslate": "^0.17.3"
+  }
+}
