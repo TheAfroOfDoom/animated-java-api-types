@@ -1,1 +1,1 @@
-# animated-jata-api-types
+# animated-java-api-types
