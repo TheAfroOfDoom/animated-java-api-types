@@ -1,52 +1,55 @@
 import type { Subscribable } from './subscribable'
+declare global {
+	namespace AnimatedJava {
+		interface IInfoPopup {
+			type: 'warning' | 'error' | 'info'
+			title: string
+			lines: string[]
+		}
 
-export interface IInfoPopup {
-	type: 'warning' | 'error' | 'info'
-	title: string
-	lines: string[]
+		type SettingID =
+			`${string}${string}:${string}${string}/${string}${string}`
+
+		interface ISettingOptions<V> {
+			/**
+			 * The id of the setting.
+			 * The id should be in the format of `namespace:interface/setting_name`.
+			 * This should be unique across all plugins and interfaces!
+			 */
+			id: SettingID
+			displayName: string
+			/**
+			 * A list of paragraphs to display in the description of the setting.
+			 */
+			description: string[]
+			/**
+			 * The default value of the setting.
+			 */
+			defaultValue: V
+			/**
+			 * Whether or not the setting can be reset to its default value.
+			 */
+			resettable?: boolean
+			/**
+			 * A link to the docs page/section for this setting.
+			 */
+			docsLink?: string
+			/**
+			 * A list of settings that this setting depends on.
+			 * If any of the settings in this list update, this setting will also update.
+			 */
+			dependsOn?: AnimatedJava.SettingID[]
+		}
+
+		type ISettingsObject = Record<string, Setting<any>>
+	}
 }
-
-export type SettingID =
-	`${string}${string}:${string}${string}/${string}${string}`
-
-export interface ISettingOptions<V> {
-	/**
-	 * The id of the setting.
-	 * The id should be in the format of `namespace:interface/setting_name`.
-	 * This should be unique across all plugins and interfaces!
-	 */
-	id: SettingID
-	displayName: string
-	/**
-	 * A list of paragraphs to display in the description of the setting.
-	 */
-	description: string[]
-	/**
-	 * The default value of the setting.
-	 */
-	defaultValue: V
-	/**
-	 * Whether or not the setting can be reset to its default value.
-	 */
-	resettable?: boolean
-	/**
-	 * A link to the docs page/section for this setting.
-	 */
-	docsLink?: string
-	/**
-	 * A list of settings that this setting depends on.
-	 * If any of the settings in this list update, this setting will also update.
-	 */
-	dependsOn?: SettingID[]
-}
-
-export type ISettingsObject = Record<string, Setting<any>>
 
 export class Setting<V, R = any> extends Subscribable<R> {
 	static registeredSettings: Map<string, Setting<any>>
 
 	constructor(
-		options: ISettingOptions<V>,
+		options: AnimatedJava.ISettingOptions<V>,
 		onUpdate?: (setting: R) => void,
 		onInit?: (setting: R) => void
 	)
@@ -54,27 +57,27 @@ export class Setting<V, R = any> extends Subscribable<R> {
 	public onUpdate?: (setting: R) => void
 	public onInit?: (setting: R) => void
 
-	id: SettingID
+	id: AnimatedJava.SettingID
 	displayName: string
 	description: string[]
 	defaultValue: V
 	resettable?: boolean
 	docsLink?: string
-	dependsOn?: SettingID[]
+	dependsOn?: AnimatedJava.SettingID[]
 
 	value: V
 
-	verify(): IInfoPopup | undefined
+	verify(): AnimatedJava.IInfoPopup | undefined
 
 	private _initialized: boolean
 	protected _value: V
 	private lastValue: V
-	infoPopup?: IInfoPopup
+	infoPopup?: AnimatedJava.IInfoPopup
 }
 
 export class CheckboxSetting extends Setting<boolean, CheckboxSetting> {
 	constructor(
-		options: ISettingOptions<boolean>,
+		options: AnimatedJava.ISettingOptions<boolean>,
 		onUpdate?: (setting: CheckboxSetting) => void,
 		onInit?: (setting: CheckboxSetting) => void
 	)
@@ -83,7 +86,7 @@ export class CheckboxSetting extends Setting<boolean, CheckboxSetting> {
 }
 export class InlineTextSetting extends Setting<string, InlineTextSetting> {
 	constructor(
-		options: ISettingOptions<string>,
+		options: AnimatedJava.ISettingOptions<string>,
 		onUpdate?: (setting: InlineTextSetting) => void,
 		onInit?: (setting: InlineTextSetting) => void
 	)
@@ -93,7 +96,7 @@ export class InlineTextSetting extends Setting<string, InlineTextSetting> {
 export class CodeboxSetting extends Setting<string, CodeboxSetting> {
 	language: string
 	constructor(
-		options: ISettingOptions<string> & { language: string },
+		options: AnimatedJava.ISettingOptions<string> & { language: string },
 		onUpdate?: (setting: CodeboxSetting) => void,
 		onInit?: (setting: CodeboxSetting) => void
 	)
@@ -102,7 +105,7 @@ export class CodeboxSetting extends Setting<string, CodeboxSetting> {
 }
 export class FolderSetting extends Setting<string, FolderSetting> {
 	constructor(
-		options: ISettingOptions<string>,
+		options: AnimatedJava.ISettingOptions<string>,
 		onUpdate?: (setting: FolderSetting) => void,
 		onInit?: (setting: FolderSetting) => void
 	)
@@ -111,7 +114,7 @@ export class FolderSetting extends Setting<string, FolderSetting> {
 }
 export class FileSetting extends Setting<string, FileSetting> {
 	constructor(
-		options: ISettingOptions<string>,
+		options: AnimatedJava.ISettingOptions<string>,
 		onUpdate?: (setting: FileSetting) => void,
 		onInit?: (setting: FileSetting) => void
 	)
@@ -124,7 +127,7 @@ export class NumberSetting extends Setting<number, NumberSetting> {
 	step?: number
 	snap?: boolean
 	constructor(
-		options: ISettingOptions<number> & {
+		options: AnimatedJava.ISettingOptions<number> & {
 			min?: number
 			max?: number
 			step?: number
@@ -143,7 +146,7 @@ export class DropdownSetting<
 > extends Setting<K, DropdownSetting<V, K>> {
 	options: Array<{ name: string; value: V }>
 	constructor(
-		options: ISettingOptions<K> & {
+		options: AnimatedJava.ISettingOptions<K> & {
 			options: DropdownSetting<V, K>['options']
 		},
 		onUpdate?: (setting: DropdownSetting<V, K>) => void,
@@ -157,7 +160,7 @@ export class DropdownSetting<
 
 export class ImageDropdownSetting extends DropdownSetting<Texture['uuid']> {
 	constructor(
-		options: ISettingOptions<number> & {
+		options: AnimatedJava.ISettingOptions<number> & {
 			options: ImageDropdownSetting['options']
 		},
 		onUpdate?: (setting: ImageDropdownSetting) => void,
@@ -177,4 +180,4 @@ export function createInfo(
 	type: 'error' | 'warning' | 'info',
 	info: string,
 	formatObject?: Record<string, string> | string[]
-): IInfoPopup
+): AnimatedJava.IInfoPopup

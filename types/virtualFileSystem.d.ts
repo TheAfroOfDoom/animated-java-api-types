@@ -1,5 +1,3 @@
-import { isValidDatapackName } from './minecraft'
-
 declare class VirtualNode {
 	constructor(name: string, parent?: VirtualNode)
 	public name: string

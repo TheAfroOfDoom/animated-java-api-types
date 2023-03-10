@@ -1,5 +1,3 @@
-import type { SettingID } from './settings'
-
 interface IGUIElement {
 	type: string
 }
@@ -9,23 +7,24 @@ interface IGUIElements {
 		type: 'group'
 		openByDefault: boolean
 		title: string
-		children: GUIStructure
+		children: AnimatedJava.GUIStructure
 	}
 	setting: IGUIElement & {
 		type: 'setting'
-		settingId: SettingID
+		settingId: AnimatedJava.SettingID
 	}
 	toggle: {
 		type: 'toggle'
-		settingId: SettingID
+		settingId: AnimatedJava.SettingID
 		title?: string
 		activeTitle?: string
 		inactiveTitle?: string
-		active: GUIStructure
-		inactive: GUIStructure
+		active: AnimatedJava.GUIStructure
+		inactive: AnimatedJava.GUIStructure
 	}
 }
 
-export type AnyGUIElement = IGUIElements[keyof IGUIElements]
-
-export type GUIStructure = AnyGUIElement[]
+declare namespace AnimatedJava {
+	type AnyGUIElement = IGUIElements[keyof IGUIElements]
+	type GUIStructure = AnyGUIElement[]
+}

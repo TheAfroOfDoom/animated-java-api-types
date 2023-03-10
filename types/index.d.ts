@@ -1,20 +1,27 @@
-import './global'
+/// <reference path="./animationRenderer.d.ts" />
+/// <reference path="./modelRenderer.d.ts" />
+/// <reference path="./guiStructure.d.ts" />
+/// <reference path="./global.d.ts" />
+
 import type { AnimatedJavaExporter } from './animatedJavaExporter'
 import type { generateSearchTree, JsonText } from './minecraft'
-import type { IAnimatedJavaProjectSettings } from './projectSettings'
 import type { createInfo, Setting } from './settings'
 import type { addTranslations, translate } from './translation'
 import type { formatStr, roundTo, roundToN } from './util'
 import type { ProgressBarController } from './util/progressBarController'
 import type { VariantsContainer } from './variants'
+import type * as VFS from './virtualFileSystem'
 
 declare global {
-	const AnimatedJava: {
-		loaded?: boolean
-		docClick: (link: string) => void
-		events: typeof import('./events')
+	namespace AnimatedJava {
+		export const loaded: boolean
+		export function docClick(link: string): void
+		export const events: typeof import('./events')
 
-		API: {
+		export class VirtualFile extends VFS.VirtualFile {}
+		export class VirtualFolder extends VFS.VirtualFolder {}
+
+		export const API: {
 			Exporter: typeof AnimatedJavaExporter
 			Settings: typeof import('./settings')
 			translate: typeof translate
@@ -41,7 +48,7 @@ declare global {
 	}
 
 	interface ModelProject {
-		animated_java_settings?: IAnimatedJavaProjectSettings
+		animated_java_settings?: AnimatedJava.IProjectSettings
 		animated_java_exporter_settings?: Record<
 			string,
 			Record<string, Setting<any>>

@@ -1,46 +1,53 @@
 import type { Subscribable } from './subscribable'
 
-export type TextureId = `${string}::${string}`
-export type TextureMap = Record<TextureId, TextureId>
-export interface ITextureMapping {
-	from: TextureId
-	fromUUID?: string
-	fromName?: string
-	fromTexture?: Texture
-	fallbackFrom?: boolean
-	to: TextureId
-	toUUID?: string
-	toName?: string
-	toTexture?: Texture
-	fallbackTo?: boolean
+declare global {
+	namespace AnimatedJava {
+		type TextureId = `${string}::${string}`
+		type TextureMap = Record<TextureId, TextureId>
+		interface ITextureMapping {
+			from: TextureId
+			fromUUID?: string
+			fromName?: string
+			fromTexture?: Texture
+			fallbackFrom?: boolean
+			to: TextureId
+			toUUID?: string
+			toName?: string
+			toTexture?: Texture
+			fallbackTo?: boolean
+		}
+	}
 }
 
 export class Variant {
-	textureMap: TextureMap
+	textureMap: AnimatedJava.TextureMap
 	default?: boolean
 	_name: string
 	uuid: string
-	constructor(name: string, textures?: TextureMap, uuid?: string)
+	constructor(name: string, textures?: AnimatedJava.TextureMap, uuid?: string)
 
 	get name(): string
 	set name(name: string)
 
-	addTextureMapping(from: TextureId, to: TextureId): void
-	removeTextureMapping(from: TextureId): void
-	getTexture(id: TextureId): Texture | undefined
+	addTextureMapping(
+		from: AnimatedJava.TextureId,
+		to: AnimatedJava.TextureId
+	): void
+	removeTextureMapping(from: AnimatedJava.TextureId): void
+	getTexture(id: AnimatedJava.TextureId): Texture | undefined
 	verifyTextures(silent?: boolean): boolean
-	textureMapIterator(): Generator<ITextureMapping, void, unknown>
+	textureMapIterator(): Generator<AnimatedJava.ITextureMapping, void, unknown>
 	createUniqueName(otherVariants: Variant[]): void
 	toJSON(): {
 		name: string
-		textures: TextureMap
+		textures: AnimatedJava.TextureMap
 		uuid: string
 		default: boolean
 	}
 
 	static fromJSON(json: {
 		name: string
-		textures: TextureMap
+		textures: AnimatedJava.TextureMap
 		uuid: string
 	}): Variant
 }
