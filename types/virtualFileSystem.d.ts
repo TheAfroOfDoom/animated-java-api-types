@@ -1,3 +1,5 @@
+import { ProgressBarController } from './util/progressBarController'
+
 declare class VirtualNode {
 	constructor(name: string, parent?: VirtualNode)
 	public name: string
@@ -44,10 +46,7 @@ export class VirtualFolder extends VirtualNode {
 	 * @param content The content of the file. If content is an Array of strings each string will be treated as a new line in the file.
 	 * @returns The folder this function was called on
 	 */
-	chainNewFile(
-		name: string,
-		content: VirtualFileContent
-	): VirtualFolder | never
+	chainNewFile(name: string, content: VirtualFileContent): VirtualFolder | never
 
 	/**
 	 * Create a new file in this folder, and return the parent folder
@@ -70,26 +69,16 @@ export class VirtualFolder extends VirtualNode {
 	 */
 	accessFile(path: string): VirtualFile | never
 
-	writeToDisk(
-		outputFolder: string,
-		progressCallback?: (change: number) => void
-	): Promise<void>
+	writeToDisk(outputFolder: string, progress?: ProgressBarController): Promise<void>
 }
 
 type VirtualFileContent = string | Buffer | Uint8Array | string[] | any
 export class VirtualFile extends VirtualNode {
-	constructor(
-		fileName: string,
-		parent: VirtualFolder,
-		content: VirtualFileContent
-	)
+	constructor(fileName: string, parent: VirtualFolder, content: VirtualFileContent)
 	public ext: string
 	public fileName: string
 	public parent: VirtualFolder
 	public content: VirtualFileContent
 
-	writeToDisk(
-		outputFolder: string,
-		progressCallback?: (change: number) => void
-	): Promise<void>
+	writeToDisk(outputFolder: string, progress?: ProgressBarController): Promise<void>
 }

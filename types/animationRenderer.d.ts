@@ -1,25 +1,24 @@
 declare namespace AnimatedJava {
-	export interface IAnimationBone {
+	export interface IAnimationNode {
+		type: 'bone' | 'camera' | 'locator'
 		name: string
 		uuid: string
-		group?: Group
-		matrix: number[]
+		node?: Group | NullObject | Locator | OutlinerElement
+		matrix: THREE.Matrix4
+		pos: THREE.Vector3
+		rot: THREE.Quaternion
+		scale: THREE.Vector3
 	}
-
 	export interface IRenderedAnimation {
 		name: string
 		frames: Array<{
-			bones: IAnimationBone[]
+			nodes: IAnimationNode[]
 			variant?: {
 				uuid: string
 				executeCondition: string
 			}
 			commands?: {
 				commands: string
-				executeCondition: string
-			}
-			animationState?: {
-				animation: string
 				executeCondition: string
 			}
 		}>

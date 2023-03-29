@@ -24,10 +24,7 @@ interface IAnimatedJavaExporterOptions<S extends AnimatedJava.ProjectSettings> {
 }
 
 export class AnimatedJavaExporter<
-	S extends AnimatedJava.ProjectSettings = Record<
-		AnimatedJava.NamespacedString,
-		Setting<any>
-	>
+	S extends AnimatedJava.ProjectSettings = Record<AnimatedJava.NamespacedString, Setting<any>>
 > {
 	static all: AnimatedJavaExporter[]
 	constructor(options: IAnimatedJavaExporterOptions<S>)

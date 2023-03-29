@@ -42,17 +42,33 @@ declare global {
 	// Blockbench Type modifications
 	//-------------------------------
 
+	// eslint-disable-next-line @typescript-eslint/naming-convention
+	interface _Animation {
+		affectedBones: Array<{ name: string; value: string }>
+		affectedBonesIsAWhitelist: boolean
+	}
+
+	interface AnimationOptions {
+		affected_bones?: Array<{ name: string; value: string }>
+		affected_bones_is_a_whitelist?: boolean
+	}
+
+	interface AnimationUndoCopy {
+		affected_bones: Array<{ name: string; value: string }>
+		affected_bones_is_a_whitelist: boolean
+	}
+
 	interface Cube {
 		forceVisible?: boolean
-		_forceVisible?: boolean
+	}
+
+	interface Group {
+		nbt?: string
 	}
 
 	interface ModelProject {
 		animated_java_settings?: AnimatedJava.IProjectSettings
-		animated_java_exporter_settings?: Record<
-			string,
-			Record<string, Setting<any>>
-		>
+		animated_java_exporter_settings?: Record<string, Record<string, Setting<any>>>
 		animated_java_variants?: VariantsContainer
 	}
 }

@@ -19,20 +19,32 @@ declare global {
 	}
 }
 
+export interface IBoneConfig {
+	nbt: string
+}
+
 export class Variant {
 	textureMap: AnimatedJava.TextureMap
+	boneConfig: Record<string, IBoneConfig>
 	default?: boolean
 	_name: string
 	uuid: string
-	constructor(name: string, textures?: AnimatedJava.TextureMap, uuid?: string)
+	affectedBones: Array<{ name: string; value: string }>
+	affectedBonesIsAWhitelist: boolean
+
+	constructor(
+		name: string,
+		textures?: AnimatedJava.TextureMap,
+		uuid?: string,
+		boneConfig?: Record<string, IBoneConfig>,
+		affectedBones?: Array<{ name: string; value: string }>,
+		affectedBonesIsAWhitelist?: boolean
+	)
 
 	get name(): string
 	set name(name: string)
 
-	addTextureMapping(
-		from: AnimatedJava.TextureId,
-		to: AnimatedJava.TextureId
-	): void
+	addTextureMapping(from: AnimatedJava.TextureId, to: AnimatedJava.TextureId): void
 	removeTextureMapping(from: AnimatedJava.TextureId): void
 	getTexture(id: AnimatedJava.TextureId): Texture | undefined
 	verifyTextures(silent?: boolean): boolean
@@ -43,12 +55,18 @@ export class Variant {
 		textures: AnimatedJava.TextureMap
 		uuid: string
 		default: boolean
+		boneConfig: Record<string, IBoneConfig>
+		affectedBones: Array<{ name: string; value: string }>
+		affectedBonesIsAWhitelist: boolean
 	}
 
 	static fromJSON(json: {
 		name: string
 		textures: AnimatedJava.TextureMap
 		uuid: string
+		boneConfig: Record<string, IBoneConfig>
+		affectedBones?: Array<{ name: string; value: string }>
+		affectedBonesIsAWhitelist?: boolean
 	}): Variant
 }
 

@@ -16,5 +16,6 @@ declare global {
 }
 
 export function generateSearchTree<T>(
-	items: T[]
-): AnimatedJava.ITreeBranch<T> | AnimatedJava.ITreeLeaf<T>
+	items: T[],
+	trimmer?: (item: AnimatedJava.ITreeBranch<T> | AnimatedJava.ITreeLeaf<T>) => boolean | void
+): AnimatedJava.ITreeBranch<T> | AnimatedJava.ITreeLeaf<T> | undefined

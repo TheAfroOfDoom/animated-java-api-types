@@ -5,6 +5,7 @@ export class ProgressBarController {
 	public total: number
 
 	add(change: number): void
+	update(): void
 	setMessage(message: string): void
 	finish(): void
 }

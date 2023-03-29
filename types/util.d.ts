@@ -1,8 +1,8 @@
 export function objectEqual(a: any, b: any): boolean
 
-// Rounds a n to the nearist multiple of d
+/** Rounds a n to the nearist multiple of d */
 export function roundTo(n: number, d: number): number
-// Rounds a number to the nearest xth decimal place
+/** Rounds a number to the nearest xth decimal place */
 export function roundToN(n: number, x: number): number
 
 /**
@@ -31,7 +31,4 @@ export class LimitClock {
  */
 export function resolveEnv(path: string): string
 
-export function formatStr(
-	str: string,
-	formatObj?: Record<string, string> | string[]
-): string
+export function formatStr(str: string, formatObj?: Record<string, string> | string[]): string
