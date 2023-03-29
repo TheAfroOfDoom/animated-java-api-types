@@ -1,6 +1,7 @@
 {
 	"name": "animated-java-api-types",
 	"version": "1.0.0",
+	"types": "types/index.d.ts",
 	"devDependencies": {
 		"@types/node": "^18.14.6",
 		"blockbench-types": "https://github.com/SnaveSutit/blockbench-types.git",
