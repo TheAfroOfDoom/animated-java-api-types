@@ -8,6 +8,7 @@ declare namespace AnimatedJava {
 		pos: THREE.Vector3
 		rot: THREE.Quaternion
 		scale: THREE.Vector3
+		forced_interpolation_duration?: number
 	}
 	export interface IRenderedAnimation {
 		name: string
