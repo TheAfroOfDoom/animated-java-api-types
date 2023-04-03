@@ -37,7 +37,7 @@ declare global {
 			generateSearchTree: typeof generateSearchTree
 			minecraft: typeof import('./minecraft')
 			ExpectedError: typeof ExpectedError
-			LimitClock: LimitClock
+			LimitClock: typeof LimitClock
 		}
 	}
 
