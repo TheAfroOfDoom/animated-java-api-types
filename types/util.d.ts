@@ -32,3 +32,5 @@ export class LimitClock {
 export function resolveEnv(path: string): string
 
 export function formatStr(str: string, formatObj?: Record<string, string> | string[]): string
+
+export class ExpectedError extends Error {}

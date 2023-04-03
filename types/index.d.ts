@@ -7,7 +7,7 @@ import type { AnimatedJavaExporter } from './animatedJavaExporter'
 import type { generateSearchTree, JsonText } from './minecraft'
 import type { createInfo, Setting } from './settings'
 import type { addTranslations, translate } from './translation'
-import type { formatStr, roundTo, roundToN } from './util'
+import type { ExpectedError, formatStr, LimitClock, roundTo, roundToN } from './util'
 import type { ProgressBarController } from './util/progressBarController'
 import type { VariantsContainer } from './variants'
 import type * as VFS from './virtualFileSystem'
@@ -35,6 +35,9 @@ declare global {
 			createInfo: typeof createInfo
 			JsonText: typeof JsonText
 			generateSearchTree: typeof generateSearchTree
+			minecraft: typeof import('./minecraft')
+			ExpectedError: typeof ExpectedError
+			LimitClock: LimitClock
 		}
 	}
 

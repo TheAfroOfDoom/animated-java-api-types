@@ -2,19 +2,12 @@ import type { Subscribable } from './subscribable'
 
 declare global {
 	namespace AnimatedJava {
-		type TextureId = `${string}::${string}`
-		type TextureMap = Record<TextureId, TextureId>
+		type TextureMap = Record<string, string>
 		interface ITextureMapping {
-			from: TextureId
-			fromUUID?: string
-			fromName?: string
+			from: string
 			fromTexture?: Texture
-			fallbackFrom?: boolean
-			to: TextureId
-			toUUID?: string
-			toName?: string
+			to: string
 			toTexture?: Texture
-			fallbackTo?: boolean
 		}
 	}
 }
@@ -44,9 +37,9 @@ export class Variant {
 	get name(): string
 	set name(name: string)
 
-	addTextureMapping(from: AnimatedJava.TextureId, to: AnimatedJava.TextureId): void
-	removeTextureMapping(from: AnimatedJava.TextureId): void
-	getTexture(id: AnimatedJava.TextureId): Texture | undefined
+	addTextureMapping(from: string, to: string): void
+	removeTextureMapping(from: string): void
+	getTexture(id: string): Texture | undefined
 	verifyTextures(silent?: boolean): boolean
 	textureMapIterator(): Generator<AnimatedJava.ITextureMapping, void, unknown>
 	createUniqueName(otherVariants: Variant[]): void
