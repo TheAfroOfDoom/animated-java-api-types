@@ -69,10 +69,12 @@ declare global {
 				type: 'camera'
 				name: string
 				node: ICamera
+				teleported_entity_type: string
 			}
 			Locator: IRenderedNode & {
 				type: 'locator'
 				node: Locator
+				teleported_entity_type: string
 			}
 		}
 

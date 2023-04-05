@@ -23,7 +23,7 @@ export class LimitClock {
 	lastTime: number
 	public limit: number
 
-	sync(): Promise<void>
+	sync(): Promise<boolean>
 }
 
 /**
