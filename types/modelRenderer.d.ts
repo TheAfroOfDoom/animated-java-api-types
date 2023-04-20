@@ -38,6 +38,7 @@ declare global {
 		export interface IRenderedNode {
 			type: string
 			parent: string
+			parentNode: Group | null
 			name: string
 			node: OutlinerNode
 		}

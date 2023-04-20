@@ -3,7 +3,6 @@ import type { IAnimatedJavaSettings, Setting } from './settings'
 declare global {
 	namespace AnimatedJava {
 		type NamespacedString = `${string}${string}:${string}${string}`
-		type ProjectSettings = Record<NamespacedString, Setting<any>>
 		export interface IAnimatedJavaExportData<S> {
 			ajSettings: IAnimatedJavaSettings
 			projectSettings: AnimatedJava.IProjectSettings
@@ -14,7 +13,7 @@ declare global {
 	}
 }
 
-export interface IAnimatedJavaExporterOptions<S extends AnimatedJava.ProjectSettings> {
+export interface IAnimatedJavaExporterOptions<S extends AnimatedJava.IProjectSettings> {
 	id: AnimatedJava.NamespacedString
 	name: string
 	description: string
@@ -24,10 +23,8 @@ export interface IAnimatedJavaExporterOptions<S extends AnimatedJava.ProjectSett
 	export(exportData: AnimatedJava.IAnimatedJavaExportData<S>): Promise<void> | void
 }
 
-export class AnimatedJavaExporter<
-	S extends AnimatedJava.ProjectSettings = Record<AnimatedJava.NamespacedString, Setting<any>>
-> {
-	static all: AnimatedJavaExporter[]
+export class AnimatedJavaExporter<S extends AnimatedJava.IProjectSettings> {
+	static all: AnimatedJavaExporter<any>[]
 	constructor(options: IAnimatedJavaExporterOptions<S>)
 	id: AnimatedJava.NamespacedString
 	name: string

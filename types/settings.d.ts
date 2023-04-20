@@ -7,8 +7,7 @@ declare global {
 			lines: string[]
 		}
 
-		type SettingID =
-			`${string}${string}:${string}${string}/${string}${string}`
+		type SettingID = `${string}${string}:${string}${string}/${string}${string}`
 
 		interface ISettingOptions<V> {
 			/**
@@ -140,10 +139,39 @@ export class NumberSetting extends Setting<number, NumberSetting> {
 	onInit?: (setting: NumberSetting) => void
 }
 
-export class DropdownSetting<
-	V = any,
-	K extends number = number
-> extends Setting<K, DropdownSetting<V, K>> {
+export class DoubleNumberSetting extends Setting<[number, number], DoubleNumberSetting> {
+	min?: number
+	max?: number
+	step?: number
+	snap?: boolean
+	firstNumberLabel?: string
+	secondNumberLabel?: string
+
+	constructor(
+		options: AnimatedJava.ISettingOptions<[number, number]> & {
+			min?: number
+			max?: number
+			step?: number
+			snap?: boolean
+			firstNumberLabel?: string
+			secondNumberLabel?: string
+		},
+		onUpdate?: (setting: DoubleNumberSetting) => void,
+		onInit?: (setting: DoubleNumberSetting) => void
+	)
+
+	get numberA(): number
+	set numberA(value: number)
+
+	get numberB(): number
+	set numberB(value: number)
+	_onUpdate(forced: boolean): void
+}
+
+export class DropdownSetting<V = any, K extends number = number> extends Setting<
+	K,
+	DropdownSetting<V, K>
+> {
 	options: Array<{ name: string; value: V }>
 	constructor(
 		options: AnimatedJava.ISettingOptions<K> & {
