@@ -11,6 +11,7 @@ import type { ExpectedError, formatStr, LimitClock, roundTo, roundToN } from './
 import type { ProgressBarController } from './util/progressBarController'
 import type { VariantsContainer } from './variants'
 import type * as VFS from './virtualFileSystem'
+import './projectSettings'
 
 declare global {
 	namespace AnimatedJava {
