@@ -10,19 +10,26 @@ declare namespace AnimatedJava {
 		scale: THREE.Vector3
 		interpolation?: 'instant' | 'default'
 	}
+	export interface IRenderedFrame {
+		time: number
+		nodes: IAnimationNode[]
+		variant?: {
+			uuid: string
+			executeCondition: string
+		}
+		commands?: {
+			commands: string
+			executeCondition: string
+		}
+		animationState?: {
+			animation: string
+			executeCondition: string
+		}
+	}
+
 	export interface IRenderedAnimation {
 		name: string
-		frames: Array<{
-			nodes: IAnimationNode[]
-			variant?: {
-				uuid: string
-				executeCondition: string
-			}
-			commands?: {
-				commands: string
-				executeCondition: string
-			}
-		}>
+		frames: IRenderedFrame[]
 		/**
 		 * Duration of the animation in ticks (AKA frames). Same as animation.frames.length
 		 */

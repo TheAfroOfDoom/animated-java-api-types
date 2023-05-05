@@ -72,6 +72,9 @@ export class Setting<V, R = any> extends Subscribable<R> {
 	protected _value: V
 	private lastValue: V
 	infoPopup?: AnimatedJava.IInfoPopup
+
+	_save(): any
+	_load(value: any): void
 }
 
 export class CheckboxSetting extends Setting<boolean, CheckboxSetting> {
