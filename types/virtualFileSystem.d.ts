@@ -1,5 +1,10 @@
 import { ProgressBarController } from './util/progressBarController'
 
+interface VirtualFileSystemWriteOptions {
+	skipEmptyFolders?: boolean
+	progress?: ProgressBarController
+}
+
 declare class VirtualNode {
 	constructor(name: string, parent?: VirtualNode)
 	public name: string
@@ -87,7 +92,12 @@ export class VirtualFolder extends VirtualNode {
 
 	getAllFilePaths(): string[]
 
-	writeToDisk(outputFolder: string, progress?: ProgressBarController): Promise<void>
+	writeToDisk(outputFolder: string, writeOptions: VirtualFileSystemWriteOptions): Promise<void>
+
+	writeChildrenToDisk(
+		outputFolder: string,
+		writeOptions: VirtualFileSystemWriteOptions
+	): Promise<void>
 }
 
 type VirtualFileContent = string | Buffer | Uint8Array | string[] | any
@@ -110,5 +120,5 @@ export class VirtualFile extends VirtualNode {
 		newContent: VirtualFileContent
 	) => VirtualFileContent
 
-	writeToDisk(outputFolder: string, progress?: ProgressBarController): Promise<void>
+	writeToDisk(outputFolder: string, writeOptions: VirtualFileSystemWriteOptions): Promise<void>
 }
