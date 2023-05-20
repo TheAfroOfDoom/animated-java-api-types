@@ -204,7 +204,8 @@ export class ImageDropdownSetting extends DropdownSetting<Texture['uuid']> {
 }
 
 export interface IAnimatedJavaSettings {
-	default_exporter: DropdownSetting<string>
+	reduced_motion: CheckboxSetting
+	minify_output: CheckboxSetting
 }
 
 export function createInfo(

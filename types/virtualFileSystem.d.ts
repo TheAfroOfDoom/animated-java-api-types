@@ -18,6 +18,8 @@ export class VirtualFolder extends VirtualNode {
 
 	protected addChild()
 
+	constructor(name: string, parent?: VirtualFolder, ignoreInvalidName?: boolean)
+
 	/**
 	 * Create a new file in this folder
 	 * @param name The name of the file to create. If the name contains slashes, the parent folders will be created recursively.
