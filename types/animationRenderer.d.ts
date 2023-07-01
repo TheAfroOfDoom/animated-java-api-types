@@ -29,6 +29,8 @@ declare namespace AnimatedJava {
 
 	export interface IRenderedAnimation {
 		name: string
+		startDelay: number
+		loopDelay: number
 		frames: IRenderedFrame[]
 		/**
 		 * Duration of the animation in ticks (AKA frames). Same as animation.frames.length
