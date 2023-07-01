@@ -9,7 +9,7 @@ import type { createInfo, Setting } from './settings'
 import type { addTranslations, translate } from './translation'
 import type { ExpectedError, formatStr, LimitClock, roundTo, roundToN } from './util'
 import type { ProgressBarController } from './util/progressBarController'
-import type { VariantsContainer } from './variants'
+import './variants'
 import type * as VFS from './virtualFileSystem'
 import './projectSettings'
 
@@ -23,22 +23,23 @@ declare global {
 		export class VirtualFolder extends VFS.VirtualFolder {}
 
 		export const API: {
-			Exporter: typeof AnimatedJavaExporter
-			Settings: typeof import('./settings')
-			translate: typeof translate
 			addTranslations: typeof addTranslations
+			AJMetaFile: typeof import('./ajmeta').AJMetaFile
+			createInfo: typeof createInfo
+			deepslate: typeof import('deepslate')
+			ExpectedError: typeof ExpectedError
+			Exporter: typeof AnimatedJavaExporter
 			formatStr: typeof formatStr
+			generateSearchTree: typeof generateSearchTree
+			JsonText: typeof JsonText
+			LimitClock: typeof LimitClock
+			minecraft: typeof import('./minecraft')
+			ProgressBarController: typeof ProgressBarController
 			roundTo: typeof roundTo
 			roundToN: typeof roundToN
+			Settings: typeof import('./settings')
+			translate: typeof translate
 			VirtualFileSystem: typeof import('./virtualFileSystem')
-			deepslate: typeof import('deepslate')
-			ProgressBarController: typeof ProgressBarController
-			createInfo: typeof createInfo
-			JsonText: typeof JsonText
-			generateSearchTree: typeof generateSearchTree
-			minecraft: typeof import('./minecraft')
-			ExpectedError: typeof ExpectedError
-			LimitClock: typeof LimitClock
 		}
 	}
 
@@ -48,8 +49,8 @@ declare global {
 
 	// eslint-disable-next-line @typescript-eslint/naming-convention
 	interface _Animation {
-		affectedBones: Array<{ name: string; value: string }>
-		affectedBonesIsAWhitelist: boolean
+		affected_bones: Array<{ name: string; value: string }>
+		affected_bones_is_a_whitelist: boolean
 	}
 
 	interface AnimationOptions {
@@ -73,6 +74,7 @@ declare global {
 	interface ModelProject {
 		animated_java_settings?: AnimatedJava.IProjectSettings
 		animated_java_exporter_settings?: Record<string, Record<string, Setting<any>>>
-		animated_java_variants?: VariantsContainer
+		animated_java_variants?: AnimatedJava.VariantsContainer
+		animated_java_uuid?: string
 	}
 }
