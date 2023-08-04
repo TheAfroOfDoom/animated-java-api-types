@@ -5,6 +5,7 @@ declare global {
 		export interface IProjectSettings {
 			project_namespace: Settings.InlineTextSetting
 			project_resolution: Settings.DoubleNumberSetting
+			target_minecraft_version: Settings.DropdownSetting<string>
 			rig_item: Settings.InlineTextSetting
 			rig_item_model: Settings.InlineTextSetting
 			rig_export_folder: Settings.FolderSetting
