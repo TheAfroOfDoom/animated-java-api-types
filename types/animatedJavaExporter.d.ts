@@ -13,6 +13,8 @@ declare global {
 	}
 }
 
+export type TSafeExportProject = (cb?: () => void) => Promise<void>;
+
 type ExporterSettingsObj = Record<string, Setting<any>>
 export interface IAnimatedJavaExporterOptions<ExporterSettings extends ExporterSettingsObj> {
 	id: AnimatedJava.NamespacedString

@@ -3,7 +3,7 @@
 /// <reference path="./guiStructure.d.ts" />
 /// <reference path="./global.d.ts" />
 
-import type { AnimatedJavaExporter } from './animatedJavaExporter'
+import type { AnimatedJavaExporter, TSafeExportProject } from './animatedJavaExporter'
 import type { generateSearchTree, JsonText } from './minecraft'
 import type { createInfo, Setting } from './settings'
 import type { addTranslations, translate } from './translation'
@@ -37,6 +37,7 @@ declare global {
 			ProgressBarController: typeof ProgressBarController
 			roundTo: typeof roundTo
 			roundToN: typeof roundToN
+            safeExportProject: TSafeExportProject
 			Settings: typeof import('./settings')
 			translate: typeof translate
 			VirtualFileSystem: typeof import('./virtualFileSystem')
